@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Text To Speech Example
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label
+    class="textToSpeakLabel"
+    position="stacked">
+      Text To Speak
+    </ion-label>
+    <ion-textarea
+    class="textToSpeak"
+    disabled
+    readonly
+    value="The quick brown fox jumps over the lazy dog">  
+    </ion-textarea>
+  </ion-item>
+  <ion-button 
+  (click)="playbackButtonClicked()"
+  name="playbackButton"
+  expand="block" 
+  fill="outline">
+    Speak Text
+  </ion-button>
+</ion-content>
