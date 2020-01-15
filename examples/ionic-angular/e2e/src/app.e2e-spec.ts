@@ -7,8 +7,8 @@ describe('new App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display Speech To Text page', () => {
     page.navigateTo();
-    expect(page.getPageTitle()).toContain('Tab One');
+    expect(page.getPageTitle()).toContain('Speech To Text Example');
   });
 });
