@@ -9,7 +9,7 @@ export class SpeechToTextPage {
 
   constructor() {}
 
-  captureButtonClicked() {
+  captureSpeechButtonClicked() {
     // Capture voice input
   }
 }
