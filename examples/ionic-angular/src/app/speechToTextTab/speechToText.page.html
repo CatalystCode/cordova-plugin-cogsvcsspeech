@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Speech To Text Example
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-item>
+  <ion-label 
+  class="recognizedLabel"
+  position="stacked"
+  >
+   Recognized Text
+  </ion-label>
+  <ion-textarea 
+  class="capturedText"
+  disabled
+  readonly
+  auto-grow="true"> 
+  </ion-textarea>
+</ion-item>
+  <ion-button 
+  (click)="captureSpeechButtonClicked()"
+  name="captureButton"
+  expand="block" 
+  fill="outline">
+    Capture Speech
+  </ion-button>
+</ion-content>
