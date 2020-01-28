@@ -72,7 +72,7 @@ Environments.ts file.
 In the folder of the Ionic Application (ie examples/ionic-angular), run the following steps.
 
 Run the following command to install all packages within the app.  In a terminal
-window, browse to the speecthtoText folder
+window, browse to the examples/ionic-angular folder
 and run the following:
 
 ```bash
@@ -94,7 +94,7 @@ npm i -g cordova
 To include the wrapper for the Cognitive Services plugin as an observable, run the following command:
 
 ```bash
-cp -r ../cogservicesNative ../examples/ionic-angular/node_modules/@ionic-native/
+cp -r ../cognitiveservices ../examples/ionic-angular/node_modules/@ionic-native/
 ```
 
 While this should install all components, there have been a few changes to
@@ -108,11 +108,11 @@ cordova platform remove ios
 cordova platform add ios
 ```
 
-## Run it Application
+## Run the Application
 
 ### Run on Browser
 
-To run the application, in a terminal window, browse to the speecthtoText folder
+To run the application, in a terminal window, browse to the examples/ionic-angular folder
 and run the following:
 
 ```bash

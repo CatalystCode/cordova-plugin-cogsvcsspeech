@@ -1,0 +1,42 @@
+[
+  {
+    "__symbolic": "module",
+    "version": 4,
+    "metadata": {
+      "SpeechVoiceOptions": { "__symbolic": "interface" },
+      "CognitiveServices": {
+        "__symbolic": "class",
+        "extends": {
+          "__symbolic": "reference",
+          "module": "@ionic-native/core",
+          "name": "IonicNativePlugin",
+          "line": 40,
+          "character": 39
+        },
+        "decorators": [
+          {
+            "__symbolic": "call",
+            "expression": {
+              "__symbolic": "reference",
+              "module": "@angular/core",
+              "name": "Injectable",
+              "line": 39,
+              "character": 1
+            }
+          }
+        ],
+        "members": {
+          "SetSubscription": [{ "__symbolic": "method" }],
+          "RecognizeFromMicrophone": [{ "__symbolic": "method" }],
+          "SpeakSsml": [{ "__symbolic": "method" }],
+          "SpeakSsmlAsync": [{ "__symbolic": "method" }],
+          "SpeakText": [{ "__symbolic": "method" }],
+          "SpeakTextAsync": [{ "__symbolic": "method" }],
+          "StopListening": [{ "__symbolic": "method" }],
+          "SpeakWithVoiceOptions": [{ "__symbolic": "method" }],
+          "SpeakStop": [{ "__symbolic": "method" }]
+        }
+      }
+    }
+  }
+]
