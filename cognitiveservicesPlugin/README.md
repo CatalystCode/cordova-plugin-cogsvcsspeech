@@ -9,7 +9,7 @@ Services
 ## Installation
 
 ```bash
-cordova plugin add <folder location>/CognitiveServicesPlugin
+cordova plugin add <folder location>/cognitiveservicesPlugin
 ```
 
 ## Uninstall
