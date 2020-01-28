@@ -1,0 +1,6 @@
+.DS_Store
+cogservPlugin/node_modules/
+cogservPlugin/.gradle/
+cogservPlugin/platforms/
+cogservPlugin/src/ios/MicrosoftCognitiveServicesSpeech.framework/
+cogservPlugin/aar
