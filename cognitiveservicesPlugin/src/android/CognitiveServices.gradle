@@ -3,9 +3,14 @@ repositories{
   flatDir {
       dirs 'src/main/libs'
    }
+   mavenCentral()
+   maven {
+        url "https://csspeechstorage.blob.core.windows.net/maven"
+    }
 }
 
 dependencies {
    // Speech SDK
     implementation 'com.microsoft.cognitiveservices.speech:client-sdk:1.8.0'
+
 }

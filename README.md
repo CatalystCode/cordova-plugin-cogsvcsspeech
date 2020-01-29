@@ -94,7 +94,7 @@ npm i -g cordova
 To include the wrapper for the Cognitive Services plugin as an observable, run the following command:
 
 ```bash
-cp -r ../cognitiveservices ../examples/ionic-angular/node_modules/@ionic-native/
+cp -r ../../cognitiveservices node_modules/@ionic-native/
 ```
 
 While this should install all components, there have been a few changes to
