@@ -20,11 +20,14 @@
   auto-grow="true"> 
   </ion-textarea>
 </ion-item>
-  <ion-button 
-  (click)="captureSpeechButtonClicked()"
-  name="captureButton"
-  expand="block" 
-  fill="outline">
-    Capture Speech
-  </ion-button>
+<ion-button 
+name="captureButton"
+round
+outline
+(click)="captureSpeechButtonClicked()"
+expand="block"
+color="{{captureButtonColor}}"
+>
+  {{captureButtonText}}
+</ion-button>
 </ion-content>

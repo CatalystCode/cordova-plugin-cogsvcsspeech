@@ -21,10 +21,13 @@
     </ion-textarea>
   </ion-item>
   <ion-button 
-  (click)="playbackButtonClicked()"
   name="playbackButton"
-  expand="block" 
-  fill="outline">
-    Speak Text
+  round
+  outline
+  (click)="playbackButtonClicked()"
+  expand="block"
+  color="{{playbackButtonColor}}"
+  >
+    {{playbackButtonText}}
   </ion-button>
 </ion-content>
