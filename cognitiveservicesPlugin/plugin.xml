@@ -33,7 +33,6 @@
     </config-file>
     <!-- your configuration elements, references, source files, etc... -->
     <framework src="src/android/CognitiveServices.gradle" custom="true" type="gradleReference" />
-    <resource-file src="aar/client-sdk-1.8.0.aar" target="libs/client-sdk-1.8.0.aar" />
 </platform>
 
 <platform name="ios">

@@ -156,6 +156,21 @@ changed.
 
 ## Ionic Usage
 
+## app.module.ts
+
+```typescript
+import { CognitiveServices } from '@ionic-native/cognitiveservices/ngx';
+
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  providers: [
+    ...
+  CognitiveServices
+  ]
+```
+
 ## app.component.ts
 
 ```typescript
@@ -168,7 +183,7 @@ initializeApp() {
         this.platform.ready().then(() => {
        this.cognitiveServices.SetSubscription(
                      environment.subscriptionKey,
-               environment.cogServices.serviceRegion).then(
+               environment.serviceRegion).then(
                    () => { },
                    (error: any) => { alert(error); });
          });
