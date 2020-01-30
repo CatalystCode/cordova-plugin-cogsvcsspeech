@@ -1,0 +1,14 @@
+{
+    "name": "cordova-plugin-cogsvcsspeach-tests",
+    "version": "1.0.0-dev",
+    "description": "Cordova plugin tests for Microsoft Cognitive Services speech services.",
+    "cordova": {
+      "id": "cordova-plugin-cogsvcsspeach-tests",
+      "platforms": []
+    },
+    "keywords": [
+      "ecosystem:cordova"
+    ],
+    "author": "Microsoft CSE",
+    "license": "Apache 2.0"
+  }

@@ -125,6 +125,18 @@ Stops the AVPlayer from playing. No return value.
 
 iOS Only.
 
+## Running Plugin Tests
+
+### Android
+```bash
+npm run test:android
+```
+### iOS
+```bash
+npm run test:ios
+```
+
+
 ## Plugin Files
 
 The following files are found under the cognitiveServicesPlugin/src/

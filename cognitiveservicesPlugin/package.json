@@ -13,6 +13,10 @@
       "cordova-plugin-whitelist": {}
     }
   },
+  "scripts": {
+    "test:android": "cordova-paramedic --cleanUpAfterRun --verbose --platform android --plugin .",
+    "test:ios": "cordova-paramedic --cleanUpAfterRun --verbose --platform ios --plugin ."
+  },
   "engines": {
     "name": "cordova",
     "version": ">=3.0.0"
@@ -25,6 +29,7 @@
   "dependencies": {
     "cordova-browser": "^5.0.4",
     "cordova-ios": "^5.1.1",
+    "cordova-paramedic": "^0.5.0",
     "cordova-plugin-whitelist": "1",
     "xml-writer": "^1.7.0"
   }
