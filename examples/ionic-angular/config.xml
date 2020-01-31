@@ -3,7 +3,7 @@
     <name>ionic-angular-example</name>
     <description>Example Angular Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://localhost:8109" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -105,13 +105,4 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <allow-navigation href="http://localhost:8100" sessionid="140f1d93" />
-    <allow-navigation href="http://localhost:8101" sessionid="144df441" />
-    <allow-navigation href="http://localhost:8102" sessionid="2f01099c" />
-    <allow-navigation href="http://localhost:8103" sessionid="246aaab8" />
-    <allow-navigation href="http://localhost:8104" sessionid="8fa7a563" />
-    <allow-navigation href="http://localhost:8105" sessionid="90cc8fba" />
-    <allow-navigation href="http://localhost:8106" sessionid="06840ce4" />
-    <allow-navigation href="http://localhost:8107" sessionid="f8092395" />
-    <allow-navigation href="http://localhost:8108" sessionid="f1d69b06" />
-    <allow-navigation href="http://localhost:8109" sessionid="22ef16e9" />
 </widget>
