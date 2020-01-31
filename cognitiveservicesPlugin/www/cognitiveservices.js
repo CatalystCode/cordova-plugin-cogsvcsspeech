@@ -6,8 +6,8 @@ module.exports  = {
         return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SetSubscription', [speechSubscriptionKey, serviceRegion]);
     },
 
-    SpeakText: function(speechText, successCallback, errorCallback) {
-        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SpeakText', [speechText]);
+    startSpeaking: function(speechText, successCallback, errorCallback) {
+        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'startSpeaking', [speechText]);
     },
 
    SpeakTextAsync: function(speechText, successCallback, errorCallback) {

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CognitiveServices } from '@ionic-native/cognitiveservices/ngx';
+
 
 @Component({
   selector: 'app-textToSpeechTab',
@@ -7,11 +9,12 @@ import { Component } from '@angular/core';
 })
 
 export class TextToSpeechPage {
-  playbackButtonText = 'Speak Text';
+  playbackButtonText = 'Start Speaking';
   playbackButtonColor = 'primary';
   playbackButtonPressed = false;
+  text = 'The quick brown fox jumps over the lazy dog';
 
-  constructor() {}
+  constructor(private cognitiveServices: CognitiveServices) { }
 
   playbackButtonClicked() {
     this.togglePlaybackButton(!this.playbackButtonPressed);
@@ -26,11 +29,18 @@ export class TextToSpeechPage {
       this.playbackButtonPressed = true;
       this.playbackButtonText = 'Stop Playback';
       this.playbackButtonColor = 'danger';
+      this.textToSpeech();
     } else {
-      alert('Playback stopped');
       this.playbackButtonPressed = false;
       this.playbackButtonText = 'Speak Text';
       this.playbackButtonColor = 'primary';
     }
+  }
+
+  textToSpeech() {
+    this.cognitiveServices.startSpeaking(this.text).then(
+        () => {},
+        (error: any) => {alert(error); }
+    );
   }
 }

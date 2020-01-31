@@ -46,9 +46,18 @@
      <header-file src="src/ios/CDVCognitiveServices.h" />
      <source-file src="src/ios/CDVCognitiveServices.m" />
 
-     <framework src="MicrosoftCognitiveServicesSpeech-iOS" type="podspec" spec="1.8.0" />
+     <!--<framework src="MicrosoftCognitiveServicesSpeech-iOS" type="podspec" spec="1.8.0" />-->
+    <podspec>
+        <config>
+            <source url="https://github.com/CocoaPods/Specs.git"/>
+        </config>
+        <pods use-frameworks="true">
+            <pod name="MicrosoftCognitiveServicesSpeech-iOS" spec="1.8.0" />
+        </pods>
+    </podspec>
 
-     <framework src="AVFoundation.framework" />
+
+    <framework src="AVFoundation.framework" />
 
 
 </platform>
