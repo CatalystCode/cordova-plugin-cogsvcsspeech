@@ -125,6 +125,26 @@ Stops the AVPlayer from playing. No return value.
 
 iOS Only.
 
+## Running Plugin Tests
+
+### Android
+
+```bash
+npm run test:android
+```
+
+### iOS
+
+```bash
+npm run test:ios
+```
+
+### Browser
+
+```bash
+npm run test:browser
+```
+
 ## Plugin Files
 
 The following files are found under the cognitiveServicesPlugin/src/
@@ -304,8 +324,7 @@ directory:
 ### How it works
 
 The Cognitive Services Speech SDK for iOS is currently distributed as a
-Cocoa Framework. The SDK was downloaded
-from <https://aka.ms/csspeech/iosbinary> and linked manually.
+Cocoa Framework. The SDK is currently being downloaded from cocopods during installation of the plugin.
 
 The plugin works
 in [AVAudioSessionCategoryMultiRoute](https://developer.apple.com/documentation/avfoundation/avaudiosessioncategorymultiroute?language=objc)
@@ -321,9 +340,6 @@ directory:
 public functions that can be called.
 
 - **CDVCognitiveServices.m** --  The iOS plugin implementation
-
-**MicrosoftCognitiveServicesSpeech.framework** -- The iOS Speech SDK
-that is contained in the <https://aka.ms/csspeech/iosbinary> zip file.
 
 ### Further readings
 
