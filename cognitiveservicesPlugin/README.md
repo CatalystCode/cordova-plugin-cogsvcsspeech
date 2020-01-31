@@ -18,6 +18,18 @@ cordova plugin add <folder location>/cognitiveservicesPlugin
 cordova plugin rm microsoft-plugin-cognitiveservices
 ```
 
+### iOS Installation Quirk
+During the installation of the plugin on an iOS operating system if the following error occurs:  
+
+Error: pod: Command failed with exit code 31 
+
+run the following commands then uninstall and reinstall the plugin
+
+```bash
+sudo gem install cocoapods
+pod repo update
+```
+
 ## Supported Platforms
 
 - Android
