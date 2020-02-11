@@ -239,7 +239,7 @@ constructor(private cognitiveServices: CognitiveServices) { }
 this.cognitiveServices.StopListening();
 
 // Speak the text in the startSpeaking variable
-this.cognitiveServices.startSpeaking(startSpeaking).then(
+this.cognitiveServices.startSpeaking(textToSpeak).then(
         () => {},
         (error: any) => {alert(error);}
       );
