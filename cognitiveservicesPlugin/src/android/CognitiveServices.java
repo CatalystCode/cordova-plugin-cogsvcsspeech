@@ -35,7 +35,7 @@ public class CognitiveServices extends CordovaPlugin {
         Log.d(LOGTAG, "Plugin Called: " + action);
 
         switch(action) {
-            case "startSpeaking":
+            case "StartSpeaking":
                 getPermission(INTERNET, INTERNET_REQ_CODE);
                 cordova.getThreadPool().execute(new Runnable() {
                     public void run() {

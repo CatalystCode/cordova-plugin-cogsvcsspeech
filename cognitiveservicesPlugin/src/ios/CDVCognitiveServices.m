@@ -147,7 +147,7 @@
 }
 
 
-- (void)startSpeaking: (CDVInvokedUrlCommand*)command {
+- (void)StartSpeaking: (CDVInvokedUrlCommand*)command {
 
     CDVPluginResult* pluginResult = nil;
 

@@ -6,16 +6,16 @@ exports.defineAutoTests = function () {
         });
         //test startSpeaking
         it("should be a function", function () {
-            expect(typeof microsoft.plugin.cognitiveservices.startSpeaking === "function").toBe(true);
+            expect(typeof microsoft.plugin.cognitiveservices.StartSpeaking === "function").toBe(true);
         });
         it("Argument should be of type string", function () {
             expect(function () {
-                microsoft.plugin.cognitiveservices.startSpeaking(22);
+                microsoft.plugin.cognitiveservices.StartSpeaking(22);
             }).toThrowError("Text must be of type string");
         });
         it("Argument should not be undefined", function () {
             expect(function () {
-                microsoft.plugin.cognitiveservices.startSpeaking();
+                microsoft.plugin.cognitiveservices.StartSpeaking();
             }).toThrowError("Text must be of type string");
         });
         //test SpeakTextAsync

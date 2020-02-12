@@ -37,7 +37,7 @@ export declare class CognitiveServices extends IonicNativePlugin {
     RecognizeFromMicrophone(): Observable<Array<Object>>;
     SpeakSsml(speechText: string): Promise<string>;
     SpeakSsmlAsync(speechText: string): Promise<string>;
-    startSpeaking(speechText: string): Promise<string>;
+    StartSpeaking(speechText: string): Promise<string>;
     SpeakTextAsync(speechText: string): Promise<string>;
     StopListening(): Promise<void>;
     SpeakWithVoiceOptions(speechText: string, options?: SpeechVoiceOptions): Promise<void>;

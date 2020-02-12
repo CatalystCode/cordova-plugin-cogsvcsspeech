@@ -38,7 +38,7 @@ export class TextToSpeechPage {
   }
 
   textToSpeech() {
-    this.cognitiveServices.startSpeaking(this.text).then(
+    this.cognitiveServices.StartSpeaking(this.text).then(
         () => {},
         (error: any) => {alert(error); }
     );
