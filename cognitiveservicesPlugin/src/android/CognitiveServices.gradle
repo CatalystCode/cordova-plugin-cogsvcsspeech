@@ -3,6 +3,10 @@ repositories{
   flatDir {
       dirs 'src/main/libs'
    }
+   mavenCentral()
+   maven {
+        url "https://csspeechstorage.blob.core.windows.net/maven"
+    }
 }
 
 dependencies {

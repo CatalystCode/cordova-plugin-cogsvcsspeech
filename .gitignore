@@ -4,3 +4,4 @@ cognitiveservicesPlugin/.gradle/
 cognitiveservicesPlugin/platforms/
 cognitiveservicesPlugin/src/ios/MicrosoftCognitiveServicesSpeech.framework/
 cognitiveservicesPlugin/aar
+.vscode/

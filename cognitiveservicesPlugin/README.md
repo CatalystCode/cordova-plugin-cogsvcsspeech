@@ -137,6 +137,26 @@ Stops the AVPlayer from playing. No return value.
 
 iOS Only.
 
+## Running Plugin Tests
+
+### Android
+
+```bash
+npm run test:android
+```
+
+### iOS
+
+```bash
+npm run test:ios
+```
+
+### Browser
+
+```bash
+npm run test:browser
+```
+
 ## Plugin Files
 
 The following files are found under the cognitiveServicesPlugin/src/
@@ -168,6 +188,21 @@ changed.
 
 ## Ionic Usage
 
+## app.module.ts
+
+```typescript
+import { CognitiveServices } from '@ionic-native/cognitiveservices/ngx';
+
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  providers: [
+    ...
+  CognitiveServices
+  ]
+```
+
 ## app.component.ts
 
 ```typescript
@@ -180,7 +215,7 @@ initializeApp() {
         this.platform.ready().then(() => {
        this.cognitiveServices.SetSubscription(
                      environment.subscriptionKey,
-               environment.cogServices.serviceRegion).then(
+               environment.serviceRegion).then(
                    () => { },
                    (error: any) => { alert(error); });
          });
