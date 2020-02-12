@@ -7,7 +7,7 @@ module.exports = {
 
     startSpeaking: function (speechText, successCallback, errorCallback) {
         validateString(speechText);
-        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'textToSpeak', [speechText]);
+        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'startSpeaking', [speechText]);
     },
 
     SpeakTextAsync: function (speechText, successCallback, errorCallback) {
@@ -44,3 +44,4 @@ function validateString(text) {
         throw new Error("Text must be of type string");
     }
 }
+
