@@ -133,6 +133,22 @@ iOS Only.
 npm run test:android
 ```
 
+#### Potential Windows Error
+
+```bash
+ERROR: The process "emulator-arm.exe" not found.
+ERROR: The process "qemu-system-i386.exe" not found.
+```
+
+If you encounter the error above, we recommend starting the Android device emulator before running the test command.
+The following PowerShell command will launch the Android device emulator.
+
+```poweshell
+start-process -FilePath "powershell" -args "emulator -avd {name}"
+```
+
+Where {name} is the name of the avd to launch.
+
 ### iOS
 
 ```bash
