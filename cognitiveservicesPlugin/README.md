@@ -53,16 +53,16 @@ SetSubscription must be called before the plugin can be used by other
 method. Recommended to call the SetSubscription method in the
 InitializingApp method.
 
-### SpeakText (string speechText)
+###StartSpeaking (string speechText)
 
 **Speech Text**: The text that will be spoken by the audio player.
 
 ```js
-microsoft.plugin.cognitiveservices.SpeakText(string speechText, Function
+microsoft.plugin.cognitiveservices.StartSpeaking(string speechText, Function
 successCallback, Function errorCallback)
 ```
 
-SpeakText uses the Speech SDK to playback the text that is sent to the
+StartSpeaking uses the Speech SDK to playback the text that is sent to the
 function.
 
 ### SpeakSsml (string speechText)
@@ -254,8 +254,8 @@ constructor(private cognitiveServices: CognitiveServices) { }
 // Stop the recognition process (iOS only)
 this.cognitiveServices.StopListening();
 
-// Speak the text in the speakText variable
-this.cognitiveServices.SpeakText(speakText).then(
+// Speak the text in the StartSpeaking variable
+this.cognitiveServices.StartSpeaking(textToSpeak).then(
         () => {},
         (error: any) => {alert(error);}
       );

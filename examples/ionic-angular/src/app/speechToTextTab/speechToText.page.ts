@@ -1,4 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { CognitiveServices } from '@ionic-native/cognitiveservices/ngx';
+
 
 @Component({
   selector: 'app-speechToTextTab',
@@ -11,12 +13,12 @@ export class SpeechToTextPage {
   captureButtonColor = 'primary';
   capturePressed = false;
 
-  constructor() { }
+    constructor(private cognitiveServices: CognitiveServices) { }
 
   captureSpeechButtonClicked() {
     this.toggleSpeechButton(!this.capturePressed);
-  }
 
+  }
   stopAudioCapture() {
     this.toggleSpeechButton(false);
   }
