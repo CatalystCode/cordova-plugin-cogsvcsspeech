@@ -35,15 +35,15 @@ public class CognitiveServices extends CordovaPlugin {
         Log.d(LOGTAG, "Plugin Called: " + action);
 
         switch(action) {
-            case "SpeakText":
+            case "StartSpeaking":
                 getPermission(INTERNET, INTERNET_REQ_CODE);
                 cordova.getThreadPool().execute(new Runnable() {
                     public void run() {
-                        callbackContext.sendPluginResult(SpeakText(data));
+                        callbackContext.sendPluginResult(startSpeaking(data));
                     }
                 });
                 break;
-            case "SpeakTextAsync": 
+            case "SpeakTextAsync":
                 getPermission(INTERNET, INTERNET_REQ_CODE);
                 callbackContext.sendPluginResult(SpeakTextAsync(data));
                 break;
@@ -93,7 +93,7 @@ public class CognitiveServices extends CordovaPlugin {
         return new PluginResult(Status.OK);
     }
 
-    private PluginResult SpeakText(final JSONArray data) {
+    private PluginResult startSpeaking(final JSONArray data) {
         if (synthesizer == null) {
             return new PluginResult(Status.ERROR, subscriptionError);
         }
@@ -164,11 +164,11 @@ public class CognitiveServices extends CordovaPlugin {
         }
     }
 
-    
-    @Override 
+
+    @Override
     public void onDestroy() {
-      // Release speech synthesizer and its dependencies 
+      // Release speech synthesizer and its dependencies
       synthesizer.close();
-      speechConfig.close(); 
+      speechConfig.close();
     }
 }
