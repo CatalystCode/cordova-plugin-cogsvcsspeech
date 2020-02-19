@@ -36,7 +36,7 @@
     }];
 }
 
-- (void)RecognizeFromMicrophone: (CDVInvokedUrlCommand*)command {
+- (void)StartListening: (CDVInvokedUrlCommand*)command {
 
     CDVPluginResult* pluginResult = nil;
 

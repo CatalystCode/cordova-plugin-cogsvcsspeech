@@ -2,8 +2,12 @@
 var exec = require('cordova/exec');
 
 module.exports  = {
-    SetSubscription: function(speechSubscriptionKey, serviceRegion, successCallback, errorCallback) {
-        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SetSubscription', [speechSubscriptionKey, serviceRegion]);
+    init: function(speechKey, serviceRegion, successCallback, errorCallback) {
+
+        validateParameter(speechKey, 'speechKey');
+        validateParameter(serviceRegion, 'serviceRegion');
+
+        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SetSubscription', [speechKey, serviceRegion]);
     },
 
     SpeakText: function(speechText, successCallback, errorCallback) {
@@ -22,8 +26,8 @@ module.exports  = {
         return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SpeakSsmlAsync', [speechText]);
     },
 
-    RecognizeFromMicrophone: function(successCallback, errorCallback) {
-        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'RecognizeFromMicrophone' );
+    StartListening: function(successCallback, errorCallback) {
+        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'StartListening' );
     },
 
     StopListening: function(successCallback, errorCallback) {
@@ -34,4 +38,14 @@ module.exports  = {
         return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SpeakStop' );
     }
 
+}
+
+function validateParameter(param, name) {
+    if (param === undefined) {
+        throw new Error(name + " is required");
+    }
+
+    if (typeof param !== 'string'){
+        throw new Error(name + " must be of type string");
+    }
 }

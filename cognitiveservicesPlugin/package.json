@@ -30,7 +30,7 @@
   "dependencies": {
     "cordova-browser": "^5.0.4",
     "cordova-ios": "^5.1.1",
-    "cordova-paramedic": "apache/cordova-paramedic#dependabot/npm_and_yarn/eslint-utils-1.4.3",
+    "cordova-paramedic": "github:apache/cordova-paramedic#dependabot/npm_and_yarn/eslint-utils-1.4.3",
     "cordova-plugin-whitelist": "1",
     "xml-writer": "^1.7.0"
   }

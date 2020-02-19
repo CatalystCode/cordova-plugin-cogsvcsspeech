@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    id="microsoft-plugin-cognitiveservices"
-    version="1.0.0">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+  xmlns:android="http://schemas.android.com/apk/res/android" id="microsoft-plugin-cognitiveservices" version="1.0.0">
 
-      <name>Cognitive Services</name>
+  <name>Cognitive Services</name>
 
-     <description>Android support library for Cognitive Services</description>
+  <description>Android support library for Cognitive Services</description>
 
-     <author>Elizabeth Graham</author>
+  <author>Elizabeth Graham</author>
 
-     <engines>
-        <engine name="cordova" version=">=3.0.0"/>
-    </engines>
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
 
-     <js-module src="www/cognitiveservices.js" name="CognitiveServices">
-      <clobbers target="microsoft.plugin.cognitiveservices" />
-       </js-module>
+  <js-module src="www/cognitiveservices.js" name="CognitiveServices">
+    <clobbers target="microsoft.plugin.cognitiveservices" />
+  </js-module>
 
- <platform name="android">
+  <platform name="android">
 
-      <source-file src="src/android/CognitiveServices.java" target-dir="src/cognitiveservices"/>
-     
-      <config-file target="res/xml/config.xml" parent="/*">
+    <source-file src="src/android/CognitiveServices.java" target-dir="src/cognitiveservices"/>
+
+    <config-file target="res/xml/config.xml" parent="/*">
       <feature name="CognitiveServices">
         <param name="android-package" value="com.microsoft.cognitiveservices.speech.plugin.CognitiveServices"/>
       </feature>
     </config-file>
 
-     <config-file target="AndroidManifest.xml" parent="/manifest">
-      <uses-permission android:name="android.permission.INTERNET"/>>
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.INTERNET"/>
+      <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+>
     </config-file>
     <!-- your configuration elements, references, source files, etc... -->
     <framework src="src/android/CognitiveServices.gradle" custom="true" type="gradleReference" />
-</platform>
+  </platform>
 
-<platform name="ios">
+  <platform name="ios">
 
-      <config-file target="config.xml" parent="/*">
+    <config-file target="config.xml" parent="/*">
       <feature name="CognitiveServices">
         <param name="ios-package" value="CDVCognitiveServices"/>
       </feature>
     </config-file>
 
-     <header-file src="src/ios/CDVCognitiveServices.h" />
-     <source-file src="src/ios/CDVCognitiveServices.m" />
+    <header-file src="src/ios/CDVCognitiveServices.h" />
+    <source-file src="src/ios/CDVCognitiveServices.m" />
 
-     <framework src="MicrosoftCognitiveServicesSpeech-iOS" type="podspec" spec="1.8.0" />
+    <framework src="MicrosoftCognitiveServicesSpeech-iOS" type="podspec" spec="1.8.0" />
 
-     <framework src="AVFoundation.framework" />
+    <framework src="AVFoundation.framework" />
 
 
-</platform>
+  </platform>
 </plugin>
