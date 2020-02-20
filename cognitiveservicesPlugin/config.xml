@@ -24,5 +24,4 @@
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <engine name="browser" spec="^5.0.4" />
-    <engine name="ios" spec="^5.1.1" />
 </widget>

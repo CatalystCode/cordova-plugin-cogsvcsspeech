@@ -43,10 +43,10 @@ To create a Speech Resource, follow the instructions in the Azure
 documentation: [Try the Speech service for
 free](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started#create-a-speech-resource-in-azure).
 
-### SetSubscription (string speechSubscriptionKey, string serviceRegion)
+### init (string speechSubscriptionKey, string serviceRegion)
 
 ```js
-microsoft.plugin.cognitiveservices.SetSubscription(string speechSubscriptionKey,
+microsoft.plugin.cognitiveservices.init(string speechSubscriptionKey,
 string serviceRegion, Function successCallback, Function errorCallback)
 ```
 
@@ -58,14 +58,14 @@ subscription](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-s
 For more information read [About
 regions](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started#about-regions)
 
-SetSubscription creates the Cognitive Services speech configuration and
+init creates the Cognitive Services speech configuration and
 requires the subscription and region of the Azure Speech resource.
 
-SetSubscription must be called before the plugin can be used by other
+init must be called before the plugin can be used by other
 method. Recommended to call the SetSubscription method in the
 InitializingApp method.
 
-###StartSpeaking (string speechText)
+### StartSpeaking (string speechText)
 
 **Speech Text**: The text that will be spoken by the audio player.
 
@@ -95,10 +95,10 @@ synthesized speech using the text-to-speech service. Compared to plain
 text, SSML allows developers to fine-tune the pitch, pronunciation,
 speaking rate, volume, and more of the text-to-speech output.
 
-### RecognizeFromMicrophone ()
+### StartListening()
 
 ```js
-microsoft.plugin.cognitiveservices.RecognizeFromMicrophone (Function
+microsoft.plugin.cognitiveservices.StartListening (Function
 successCallback, Function errorCallback)
 ```
 
@@ -114,12 +114,11 @@ processing the spoken words.
 
 The return value is a set of string values.
 
-iOS Only.
 
 ### StopListening()
 
 ```js
-microsoft.plugin.cognitiveservices.stopListening(Function successCallback,
+microsoft.plugin.cognitiveservices.StopListening(Function successCallback,
 Function errorCallback)
 ```
 
@@ -130,7 +129,7 @@ iOS Only.
 ### SpeakStop()
 
 ```js
-microsoft.plugin.cognitiveservices.speakStop(Function successCallback, Function errorCallback)
+microsoft.plugin.cognitiveservices.SpeakStop(Function successCallback, Function errorCallback)
 ```
 
 Stops the AVPlayer from playing. No return value.
@@ -229,7 +228,7 @@ constructor(private cognitiveServices: CognitiveServices) { }
 // Set the subscription information
 initializeApp() {
         this.platform.ready().then(() => {
-       this.cognitiveServices.SetSubscription(
+       this.cognitiveServices.init(
                      environment.subscriptionKey,
                environment.serviceRegion).then(
                    () => { },
@@ -248,7 +247,7 @@ constructor(private cognitiveServices: CognitiveServices) { }
 ...
 
 // Start the recognition process (iOS only)
- this.cognitiveServices.RecognizeFromMicrophone().subscribe(
+ this.cognitiveServices.StartListening().subscribe(
         results => {
           if (!results.isFinal) {
               matches = results.result;

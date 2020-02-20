@@ -9,36 +9,26 @@ module.exports  = {
         return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SetSubscription', [speechKey, serviceRegion]);
     },
 
-    StartSpeaking: function (speechText, successCallback, errorCallback) {
+    startSpeaking: function (speechText, successCallback, errorCallback) {
         validateString(speechText);
         return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'StartSpeaking', [speechText]);
     },
 
-    SpeakTextAsync: function (speechText, successCallback, errorCallback) {
-        validateString(speechText);
-        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SpeakTextAsync', [speechText]);
-    },
-
-    SpeakSsml: function (speechText, successCallback, errorCallback) {
+    startSpeakingSsml: function (speechText, successCallback, errorCallback) {
         validateString(speechText);
         return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SpeakSsml', [speechText]);
     },
 
-    SpeakSsmlAsync: function (speechText, successCallback, errorCallback) {
-        validateString(speechText);
-        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SpeakSsmlAsync', [speechText]);
-    },
-
-    StartListening: function(successCallback, errorCallback) {
+    startListening: function(successCallback, errorCallback) {
         return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'StartListening' );
     },
 
-    StopListening: function (successCallback, errorCallback) {
+    stopListening: function (successCallback, errorCallback) {
         return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'StopListening');
     },
 
-    SpeakStop: function (successCallback, errorCallback) {
-        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'SpeakStop');
+    stopSpeaking: function (successCallback, errorCallback) {
+        return cordova.exec(successCallback, errorCallback, 'CognitiveServices', 'StopSpeaking');
     }
 
 }

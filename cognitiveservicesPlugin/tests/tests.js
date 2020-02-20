@@ -4,67 +4,40 @@ exports.defineAutoTests = function () {
         it("should exist", function () {
             expect(microsoft.plugin.cognitiveservices).toBeDefined();
         });
+    });
+    describe('test startSpeaking', function () {
         //test startSpeaking
         it("should be a function", function () {
-            expect(typeof microsoft.plugin.cognitiveservices.StartSpeaking === "function").toBe(true);
+            expect(typeof microsoft.plugin.cognitiveservices.startSpeaking === "function").toBe(true);
         });
         it("Argument should be of type string", function () {
             expect(function () {
-                microsoft.plugin.cognitiveservices.StartSpeaking(22);
+                microsoft.plugin.cognitiveservices.startSpeaking(22);
             }).toThrowError("Text must be of type string");
         });
         it("Argument should not be undefined", function () {
             expect(function () {
-                microsoft.plugin.cognitiveservices.StartSpeaking();
+                microsoft.plugin.cognitiveservices.startSpeaking();
             }).toThrowError("Text must be of type string");
         });
-        //test SpeakTextAsync
-        it("should exist", function () {
-            expect(typeof microsoft.plugin.cognitiveservices.SpeakTextAsync === "function").toBe(true);
-        });
-        it("Argument should be of type string", function () {
-            expect(function () {
-                microsoft.plugin.cognitiveservices.SpeakTextAsync(22);
-            }).toThrowError("Text must be of type string");
-        });
-        it("Argument should not be undefined", function () {
-            expect(function () {
-                microsoft.plugin.cognitiveservices.SpeakTextAsync();
-            }).toThrowError("Text must be of type string");
-        });
+    });
+    describe('test startSpeakingSsml', function () {
         //test SpeakSsml
         it("should exist", function () {
-            expect(typeof microsoft.plugin.cognitiveservices.SpeakSsml === "function").toBe(true);
+            expect(typeof microsoft.plugin.cognitiveservices.startSpeakingSsml === "function").toBe(true);
         });
         it("Argument should be of type string", function () {
             expect(function () {
-                microsoft.plugin.cognitiveservices.SpeakSsml(22);
+                microsoft.plugin.cognitiveservices.startSpeakingSsml(22);
             }).toThrowError("Text must be of type string");
         });
         it("Argument should not be undefined", function () {
             expect(function () {
-                microsoft.plugin.cognitiveservices.SpeakSsml();
+                microsoft.plugin.cognitiveservices.startSpeakingSsml();
             }).toThrowError("Text must be of type string");
         });
-        //test SpeakSsmlAsync
-        it("should exist", function () {
-            expect(typeof microsoft.plugin.cognitiveservices.SpeakSsmlAsync === "function").toBe(true);
-        });
-        it("Argument should be of type string", function () {
-            expect(function () {
-                microsoft.plugin.cognitiveservices.SpeakSsmlAsync(22);
-            }).toThrowError("Text must be of type string");
-        });
-        it("Argument should not be undefined", function () {
-            expect(function () {
-                microsoft.plugin.cognitiveservices.SpeakSsmlAsync();
-            }).toThrowError("Text must be of type string");
-        });
-
-
     });
-
-    describe('init', function() {
+    describe('test init', function() {
         it('should be a function', function() {
             expect(
                 typeof microsoft.plugin.cognitiveservices.init === 'function'
@@ -110,10 +83,10 @@ exports.defineManualTests = function(contentEl, createActionButton) {
     );
 
     createActionButton('Start Listening Recognized', function() {
-        microsoft.plugin.cognitiveservices.StartListening(
+        microsoft.plugin.cognitiveservices.startListening(
             function(result) {
                 if (result['isFinal']!= null) {
-                    if (result['isFinal'] == 'true') {
+                    if (result['isFinal'].toString() == 'true') {
                         console.log('Start Listening Recognized>>>' + result['result']);
                     }
                 } else {
@@ -127,10 +100,10 @@ exports.defineManualTests = function(contentEl, createActionButton) {
     });
 
     createActionButton('Start Listening Recognizing', function() {
-        microsoft.plugin.cognitiveservices.StartListening(
+        microsoft.plugin.cognitiveservices.startListening(
             function(result) {
                 if (result['isFinal']!= null) {
-                    if (result['isFinal'] == 'false') {
+                    if (result['isFinal'].toString() == 'false') {
                         console.log('Start Listening Recognizing>>>' + result['result']);
                     }
                 } else {
