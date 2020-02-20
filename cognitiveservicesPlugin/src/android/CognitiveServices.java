@@ -52,7 +52,7 @@ public class CognitiveServices extends CordovaPlugin {
         callbackContext = callbackContxt;
         executeData = data;
         switch(action) {
-            case "SpeakText":
+            case "StartSpeaking":
                 getPermission(INTERNET, INTERNET_REQ_CODE);
                 break;
             case "SpeakSsml":
@@ -91,9 +91,9 @@ public class CognitiveServices extends CordovaPlugin {
         return new PluginResult(Status.OK);
     }
 
-    private PluginResult speakText(final JSONArray data) {
-        if (speechConfig==null) {
-            return new PluginResult(Status.ERROR, "Speak Text error: " + subscriptionError);            
+    private PluginResult startSpeaking(final JSONArray data) {
+        if (synthesizer == null) {
+            return new PluginResult(Status.ERROR, subscriptionError);
         }
 
         try {
@@ -255,11 +255,11 @@ public class CognitiveServices extends CordovaPlugin {
         }
     }
 
-    
-    @Override 
+
+    @Override
     public void onDestroy() {
-      // Release speech synthesizer and its dependencies 
+      // Release speech synthesizer and its dependencies
       synthesizer.close();
-      speechConfig.close(); 
+      speechConfig.close();
     }
 }
