@@ -4,3 +4,5 @@ cognitiveservicesPlugin/.gradle/
 cognitiveservicesPlugin/platforms/
 .vscode/
 cognitiveservicesPlugin/local.properties
+examples/ionic-angular/platforms
+examples/ionic-angular/src/environments/

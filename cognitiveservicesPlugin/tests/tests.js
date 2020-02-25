@@ -78,8 +78,8 @@ exports.defineAutoTests = function () {
 
 exports.defineManualTests = function(contentEl, createActionButton) {
     microsoft.plugin.cognitiveservices.init(
-        '',
-        ''
+        'f6cf895a08c14acaa5a070e3ad43f1e4',
+        'centralus'
     );
 
     createActionButton('Start Listening Recognized', function() {
@@ -112,6 +112,17 @@ exports.defineManualTests = function(contentEl, createActionButton) {
             },
             function(err) {
                 console.log('Start Listening Recognizing Error>>>' + err);
+            }
+        );
+    });
+
+    createActionButton('Start Speaking', function() {
+        microsoft.plugin.cognitiveservices.startSpeaking('testing this',
+            function() {
+                    console.log('Start Speaking>>>Success');
+                },
+            function(err) {
+                console.log('Start Speaking Error>>>' + err);
             }
         );
     });

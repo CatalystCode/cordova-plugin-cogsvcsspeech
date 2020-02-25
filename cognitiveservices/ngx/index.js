@@ -25,12 +25,12 @@ var CognitiveServices = /** @class */ (function (_super) {
     function CognitiveServices() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    CognitiveServicesOriginal.prototype.init = function (speechKey, serviceRegion) { return cordova(this, "init", {}, arguments); };
-    CognitiveServicesOriginal.prototype.startListening = function () { return cordova(this, "startListening", { "callbackOrder": "reverse", "observable": true }, arguments); };
-    CognitiveServicesOriginal.prototype.startSpeakingSsml = function (speechText) { return cordova(this, "startSpeakingSsml", {}, arguments); };
-    CognitiveServicesOriginal.prototype.startSpeaking = function (speechText) { return cordova(this, "startSpeaking", {}, arguments); };
-    CognitiveServicesOriginal.prototype.stopListening = function () { return cordova(this, "stopListening", {}, arguments); };
-    CognitiveServicesOriginal.prototype.stopSpeaking = function () { return cordova(this, "stopSpeaking", {}, arguments); };
+    CognitiveServices.prototype.init = function (speechKey, serviceRegion) { return cordova(this, "init", {}, arguments); };
+    CognitiveServices.prototype.startListening = function () { return cordova(this, "startListening", { "callbackOrder": "reverse", "observable": true }, arguments); };
+    CognitiveServices.prototype.startSpeakingSsml = function (speechText) { return cordova(this, "startSpeakingSsml", {}, arguments); };
+    CognitiveServices.prototype.startSpeaking = function (speechText) { return cordova(this, "startSpeaking", {}, arguments); };
+    CognitiveServices.prototype.stopListening = function () { return cordova(this, "stopListening", {}, arguments); };
+    CognitiveServices.prototype.stopSpeaking = function () { return cordova(this, "stopSpeaking", {}, arguments); };
     CognitiveServices.pluginName = "Cognitive Services";
     CognitiveServices.plugin = "microsoft-plugin-cognitiveservices";
     CognitiveServices.pluginRef = "microsoft.plugin.cognitiveservices";

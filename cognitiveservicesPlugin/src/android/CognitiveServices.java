@@ -39,7 +39,7 @@ public class CognitiveServices extends CordovaPlugin {
 
     private static final String LOGTAG = "CognitiveServices";
 
-    private static final String subscriptionError = "Please run SetSubscription with the Cognitive Services subscription key and region.";
+    private static final String subscriptionError = "Please run init with the Cognitive Services subscription key and region.";
 
     private static final String INTERNET = Manifest.permission.INTERNET;
     private static final int INTERNET_REQ_CODE = 1;
@@ -92,7 +92,7 @@ public class CognitiveServices extends CordovaPlugin {
     }
 
     private PluginResult startSpeaking(final JSONArray data) {
-        if (synthesizer == null) {
+        if (speechConfig == null) {
             return new PluginResult(Status.ERROR, subscriptionError);
         }
 
@@ -232,7 +232,7 @@ public class CognitiveServices extends CordovaPlugin {
             case INTERNET_REQ_CODE:
                 cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    callbackContext.sendPluginResult(speakText(executeData));
+                    callbackContext.sendPluginResult(startSpeaking(executeData));
                     }
                 });
                 break;

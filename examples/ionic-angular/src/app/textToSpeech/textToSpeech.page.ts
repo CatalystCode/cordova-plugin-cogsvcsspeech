@@ -1,45 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { CognitiveServices } from '@ionic-native/cognitiveservices/ngx';
 
 
 @Component({
   selector: 'app-textToSpeechTab',
-  templateUrl: 'textToSpeech.page.html',
-  styleUrls: ['textToSpeech.page.scss']
+  templateUrl: './textToSpeech.page.html',
+  styleUrls: ['./textToSpeech.page.scss']
 })
 
-export class TextToSpeechPage {
+export class TextToSpeechPage implements OnInit {
+  isPlaying = false;
   playbackButtonText = 'Start Speaking';
-  playbackButtonColor = 'primary';
   playbackButtonPressed = false;
-  text = 'The quick brown fox jumps over the lazy dog';
+  text = 'The quick brown fox jumps over the lazy dog.';
+
 
   constructor(private cognitiveServices: CognitiveServices) { }
 
+  public ngOnInit(): void {
+  }
+
   playbackButtonClicked() {
-    this.togglePlaybackButton(!this.playbackButtonPressed);
+    if (this.isPlaying) {
+        this.stopAudioPlayback();
+        return;
+    }
+    this.isPlaying = true;
+    this.textToSpeech();
   }
 
   stopAudioPlayback() {
-    this.togglePlaybackButton(false);
-  }
-
-  togglePlaybackButton(state: boolean) {
-    if (state) {
-      this.playbackButtonPressed = true;
-      this.playbackButtonText = 'Stop Playback';
-      this.playbackButtonColor = 'danger';
-      this.textToSpeech();
-    } else {
-      this.playbackButtonPressed = false;
-      this.playbackButtonText = 'Speak Text';
-      this.playbackButtonColor = 'primary';
-    }
+    this.isPlaying = false;
   }
 
   textToSpeech() {
-    this.cognitiveServices.StartSpeaking(this.text).then(
-        () => {},
+    this.cognitiveServices.startSpeaking(this.text).then(
+        () => {
+          this.isPlaying = false;
+        },
         (error: any) => {alert(error); }
     );
   }
