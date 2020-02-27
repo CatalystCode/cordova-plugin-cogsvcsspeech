@@ -1,34 +1,41 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Text To Speech Example
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Text To Speech Example
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label
-    class="textToSpeakLabel"
-    position="stacked">
-      Text To Speak
-    </ion-label>
-    <ion-textarea
-    class="textToSpeak"
-    disabled
-    readonly
-    setFocus="true"
-    value="{{text}}">
-    </ion-textarea>
-  </ion-item>
-  <ion-button 
-  name="playbackButton"
-  round
-  outline
-  (click)="playbackButtonClicked()"
-  expand="block"
-  color="{{playbackButtonColor}}"
-  >
-    {{playbackButtonText}}
-  </ion-button>
+    <ion-item>
+        <ion-label
+                class="textToSpeakLabel"
+                position="stacked">
+            Text To Speak
+        </ion-label>
+        <ion-textarea
+                class="textToSpeak"
+                disabled
+                readonly
+                setFocus="true"
+                value="{{text}}">
+        </ion-textarea>
+    </ion-item>
+    <ion-item>
+        <ion-label
+                class="ssmllable">
+            Use SSML
+        </ion-label>
+        <ion-checkbox id = "use-ssml" checked="false" (ionChange)="dataChanged($event)"></ion-checkbox>
+    </ion-item>
+    <ion-button
+            name="playbackButton"
+            round
+            outline
+            (click)="playbackButtonClicked()"
+            expand="block"
+            color="{{playbackButtonColor}}"
+    >
+        {{playbackButtonText}}
+    </ion-button>
 </ion-content>
