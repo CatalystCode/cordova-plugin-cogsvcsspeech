@@ -27,8 +27,8 @@ round
 outline
 (click)="captureSpeechButtonClicked()"
 expand="block"
-color="{{captureButtonColor}}"
+[color]="isListening ? 'danger' : 'primary'"
 >
-  {{captureButtonText}}
+{{isListening ? 'Stop Capture' : 'Capture Speech'}}
 </ion-button>
 </ion-content>

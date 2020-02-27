@@ -10,8 +10,6 @@ import { CognitiveServices } from '@ionic-native/cognitiveservices/ngx';
 
 export class TextToSpeechPage implements OnInit {
   isPlaying = false;
-  playbackButtonText = 'Start Speaking';
-  playbackButtonPressed = false;
   text = 'The quick brown fox jumps over the lazy dog.';
 
 

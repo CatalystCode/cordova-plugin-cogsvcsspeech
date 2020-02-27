@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef, NgZone, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, NgZone, ChangeDetectorRef} from '@angular/core';
 import {CognitiveServices} from '@ionic-native/cognitiveservices/ngx';
 
 
@@ -8,54 +8,48 @@ import {CognitiveServices} from '@ionic-native/cognitiveservices/ngx';
     styleUrls: ['speechToText.page.scss']
 })
 
-export class SpeechToTextPage {
-    captureButtonText = 'Capture Speech';
-    captureButtonColor = 'primary';
-    capturePressed = false;
+export class SpeechToTextPage implements OnInit {
     capturedText: string[];
+    isListening = false;
 
     constructor(private zone: NgZone,
                 private cognitiveServices: CognitiveServices,
                 private cdr: ChangeDetectorRef) {
     }
 
-    captureSpeechButtonClicked() {
-        this.toggleSpeechButton(!this.capturePressed);
+    public ngOnInit(): void {
+    }
 
+    captureSpeechButtonClicked() {
+        if (this.isListening) {
+            this.stopAudioCapture();
+            return;
+        }
+        this.isListening = true;
+        this.startListening();
     }
 
     stopAudioCapture() {
-        this.toggleSpeechButton(false);
-    }
-
-    toggleSpeechButton(state: boolean) {
-        if (state) {
-            this.startListening();
-            this.capturePressed = true;
-            this.captureButtonText = 'Stop Capture';
-            this.captureButtonColor = 'danger';
-        } else {
-            this.stopListening();
-            this.capturePressed = false;
-            this.captureButtonText = 'Capture Speech';
-            this.captureButtonColor = 'primary';
-        }
+        this.isListening = false;
+        this.stopListening();
     }
 
     startListening() {
         this.cognitiveServices.startListening().subscribe(results => {
-            if (!results['isFinal']) {
-                this.zone.run(() => {
+            console.log(results['isFinal']);
+            console.log(typeof results['isFinal']);
+            this.zone.run(() => {
+                    if (results['isFinal'] === 'false') {
                     this.capturedText = results['result'];
-                    this.cdr.detectChanges();
+                    } else {
+                        console.log(results['result']);
+                        this.capturedText = results['result'];
+                        this.isListening = false;
+                    }
                 });
-            } else {
-                this.capturePressed = false;
-                this.captureButtonText = 'Capture Speech';
-                this.captureButtonColor = 'primary';
-            }
         }, (str: any) => {
             alert(str);
+            this.isListening = false;
         });
     }
 
