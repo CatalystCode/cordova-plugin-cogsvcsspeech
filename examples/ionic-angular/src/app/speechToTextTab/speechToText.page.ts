@@ -39,7 +39,7 @@ export class SpeechToTextPage implements OnInit {
             console.log(results['isFinal']);
             console.log(typeof results['isFinal']);
             this.zone.run(() => {
-                    if (results['isFinal'] === 'false') {
+                    if (results['isFinal'].toString() === 'false') {
                     this.capturedText = results['result'];
                     } else {
                         console.log(results['result']);
