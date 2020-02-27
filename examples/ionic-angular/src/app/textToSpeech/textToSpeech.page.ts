@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {CognitiveServices} from '@ionic-native/cognitiveservices/ngx';
-// import {XMLWriter} from 'xml-writer';
 import XMLWriter from 'xml-writer';
 
 @Component({
