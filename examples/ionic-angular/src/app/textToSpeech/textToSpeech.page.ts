@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {CognitiveServices} from '@ionic-native/cognitiveservices/ngx';
 import XMLWriter from 'xml-writer';
+import {config} from '../app.config';
 
 @Component({
     selector: 'app-textToSpeechTab',
@@ -59,11 +60,8 @@ export class TextToSpeechPage {
     }
 
     textToSpeechSSML() {
-        const options = {
-            language: 'en-US',
-            voice: 'Guy24KRUS'
-        };
-        const ssml = this.createSsml(this.text, options);
+
+        const ssml = this.createSsml(this.text);
         this.cognitiveServices.SpeakSsml(ssml).then(
             () => {
             },
@@ -74,18 +72,18 @@ export class TextToSpeechPage {
 
     }
 
-    createSsml(text, options) {
-        const language = options.language || 'en-US';
-        const voice = options.voice || 'Guy24KRUS';
+    createSsml(text) {
         this.xmlWriter = new XMLWriter();
         const xmlBody = this.xmlWriter
             .startDocument()
             .startElement('speak')
             .writeAttribute('version', '1.0')
-            .writeAttribute('xml:lang', language)
+            .writeAttribute('xml:lang', config.ssml.language)
             .writeAttribute('xmlns', 'https://www.w3.org/2001/10/synthesis')
             .startElement('voice')
-            .writeAttribute('name', language + '-' + voice)
+            .writeAttribute('name', config.ssml.language + '-' + config.ssml.voice)
+            .startElement('express-as')
+            .writeAttribute('type', config.ssml.type)
             .text(text)
             .endElement()
             .endElement()
