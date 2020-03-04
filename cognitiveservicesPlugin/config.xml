@@ -21,6 +21,9 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <edit-config target="NSMicrophoneUsageDescription" file="*-Info.plist" mode="merge">
+            <string>need microphone access to record sounds</string>
+        </edit-config>
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <engine name="browser" spec="^5.0.4" />

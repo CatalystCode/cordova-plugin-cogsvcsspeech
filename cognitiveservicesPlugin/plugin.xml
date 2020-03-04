@@ -46,6 +46,10 @@
      <header-file src="src/ios/CDVCognitiveServices.h" />
      <source-file src="src/ios/CDVCognitiveServices.m" />
 
+     <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
+            <string>need microphone access to record sounds</string>
+      </config-file>
+
     <podspec>
       <config>
        <source url="https://github.com/CocoaPods/Specs/Specs/a/4/c"/>
