@@ -36,13 +36,10 @@ export class SpeechToTextPage implements OnInit {
 
     startListening() {
         this.cognitiveServices.startListening().subscribe(results => {
-            console.log(results['isFinal']);
-            console.log(typeof results['isFinal']);
             this.zone.run(() => {
                     if (results['isFinal'].toString() === 'false') {
                     this.capturedText = results['result'];
                     } else {
-                        console.log(results['result']);
                         this.capturedText = results['result'];
                         this.isListening = false;
                     }
