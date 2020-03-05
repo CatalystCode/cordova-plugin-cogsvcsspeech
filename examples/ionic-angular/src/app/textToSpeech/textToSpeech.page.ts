@@ -1,57 +1,51 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CognitiveServices} from '@ionic-native/cognitiveservices/ngx';
 import XMLWriter from 'xml-writer';
 import {config} from '../app.config';
 
 @Component({
     selector: 'app-textToSpeechTab',
-    templateUrl: 'textToSpeech.page.html',
-    styleUrls: ['textToSpeech.page.scss']
+    templateUrl: './textToSpeech.page.html',
+    styleUrls: ['./textToSpeech.page.scss']
 })
 
-export class TextToSpeechPage {
-    playbackButtonText = 'Start Speaking';
-    playbackButtonColor = 'primary';
-    playbackButtonPressed = false;
-    text = 'The quick brown fox jumps over the lazy dog';
+export class TextToSpeechPage implements OnInit {
+    isPlaying = false;
+    text = 'The quick brown fox jumps over the lazy dog.';
     xmlWriter = new XMLWriter();
     useSSML = false;
 
     constructor(private cognitiveServices: CognitiveServices) {
     }
 
+    public ngOnInit(): void {
+    }
+
     playbackButtonClicked() {
-        this.togglePlaybackButton(!this.playbackButtonPressed);
+        if (this.isPlaying) {
+            this.stopAudioPlayback();
+            return;
+        }
+        this.isPlaying = true;
+        if (this.useSSML) {
+            this.textToSpeechSSML();
+        } else {
+            this.textToSpeech();
+        }
+    }
+
+    stopAudioPlayback() {
+        this.isPlaying = false;
     }
 
     dataChanged(e: any) {
         this.useSSML = e.currentTarget.checked;
     }
 
-    stopAudioPlayback() {
-        this.togglePlaybackButton(false);
-    }
-
-    togglePlaybackButton(state: boolean) {
-        if (state) {
-            this.playbackButtonPressed = true;
-            this.playbackButtonText = 'Stop Playback';
-            this.playbackButtonColor = 'danger';
-            if (this.useSSML) {
-                this.textToSpeechSSML();
-            } else {
-                this.textToSpeech();
-            }
-        } else {
-            this.playbackButtonPressed = false;
-            this.playbackButtonText = 'Speak Text';
-            this.playbackButtonColor = 'primary';
-        }
-    }
-
     textToSpeech() {
-        this.cognitiveServices.StartSpeaking(this.text).then(
+        this.cognitiveServices.startSpeaking(this.text).then(
             () => {
+                this.isPlaying = false;
             },
             (error: any) => {
                 alert(error);
@@ -62,8 +56,9 @@ export class TextToSpeechPage {
     textToSpeechSSML() {
 
         const ssml = this.createSsml(this.text);
-        this.cognitiveServices.SpeakSsml(ssml).then(
+        this.cognitiveServices.startSpeakingSsml(ssml).then(
             () => {
+                this.isPlaying = false;
             },
             (error: any) => {
                 alert(error);

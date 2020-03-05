@@ -27,8 +27,8 @@
 - (void)StopListening:(CDVInvokedUrlCommand*)command {
     [self.commandDelegate runInBackground:^{
 
-        if (speechRecognizer) {
-            [speechRecognizer stopContinuousRecognition];
+        if (self->speechRecognizer) {
+            [self->speechRecognizer stopContinuousRecognition];
         }
 
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -36,7 +36,7 @@
     }];
 }
 
-- (void)RecognizeFromMicrophone: (CDVInvokedUrlCommand*)command {
+- (void)StartListening: (CDVInvokedUrlCommand*)command {
 
     CDVPluginResult* pluginResult = nil;
 
@@ -62,17 +62,17 @@
     [speechRecognizer addRecognizingEventHandler: ^ (SPXSpeechRecognizer *recognizer, SPXSpeechRecognitionEventArgs *eventArgs) {
         [resultsDict setValue:[NSNumber numberWithBool:NO] forKey:@"isFinal"];
         [resultsDict setValue:eventArgs.result.text forKey:@"result"];
-        [resultsDict setValue:listenerCallbackId forKey:@"id"];
+        [resultsDict setValue:self->listenerCallbackId forKey:@"id"];
 
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:resultsDict];
         [pluginResult setKeepCallbackAsBool:YES];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:listenerCallbackId];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self->listenerCallbackId];
         return;
     }];
     
     //SPXSpeechRecognitionResult *speechResult = [speechRecognizer recognizeOnce];
     [self.commandDelegate runInBackground:^{
-    [speechRecognizer recognizeOnceAsync: ^ (SPXSpeechRecognitionResult * speechResult){
+    [self->speechRecognizer recognizeOnceAsync: ^ (SPXSpeechRecognitionResult * speechResult){
         CDVPluginResult* pluginResult = nil;
     if (SPXResultReason_Canceled == speechResult.reason) {
         SPXCancellationDetails *details = [[SPXCancellationDetails alloc] initFromCanceledRecognitionResult:speechResult];
@@ -99,7 +99,7 @@
 
 }
 
-- (void)SpeakStop: (CDVInvokedUrlCommand*)command {
+- (void)StopSpeaking: (CDVInvokedUrlCommand*)command {
     if (player)
     {
         //player is playing
@@ -109,6 +109,8 @@
     }
 
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
 
 }
 

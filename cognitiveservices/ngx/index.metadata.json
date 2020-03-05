@@ -26,15 +26,13 @@
           }
         ],
         "members": {
-          "SetSubscription": [{ "__symbolic": "method" }],
-          "RecognizeFromMicrophone": [{ "__symbolic": "method" }],
-          "SpeakSsml": [{ "__symbolic": "method" }],
-          "SpeakSsmlAsync": [{ "__symbolic": "method" }],
-          "SpeakText": [{ "__symbolic": "method" }],
-          "SpeakTextAsync": [{ "__symbolic": "method" }],
-          "StopListening": [{ "__symbolic": "method" }],
-          "SpeakWithVoiceOptions": [{ "__symbolic": "method" }],
-          "SpeakStop": [{ "__symbolic": "method" }]
+          "init": [{ "__symbolic": "method" }],
+          "startListening": [{ "__symbolic": "method" }],
+          "startSpeakingSsml": [{ "__symbolic": "method" }],
+          "startSpeaking": [{ "__symbolic": "method" }],
+          "stopListening": [{ "__symbolic": "method" }],
+          "speakWithVoiceOptions": [{ "__symbolic": "method" }],
+          "stopSpeaking": [{ "__symbolic": "method" }]
         }
       }
     }
