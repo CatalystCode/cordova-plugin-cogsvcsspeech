@@ -1,9 +1,12 @@
 package com.microsoft.cognitiveservices.speech.plugin;
 
 import android.Manifest;
+import android.content.pm.PackageManager;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.util.concurrent.Future;
 
@@ -12,8 +15,12 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
 
+import com.microsoft.cognitiveservices.speech.audio.AudioConfig;
+import com.microsoft.cognitiveservices.speech.CancellationDetails;
 import com.microsoft.cognitiveservices.speech.ResultReason;
 import com.microsoft.cognitiveservices.speech.SpeechConfig;
+import com.microsoft.cognitiveservices.speech.SpeechRecognitionResult;
+import com.microsoft.cognitiveservices.speech.SpeechRecognizer;
 import com.microsoft.cognitiveservices.speech.SpeechSynthesisCancellationDetails;
 import com.microsoft.cognitiveservices.speech.SpeechSynthesisResult;
 import com.microsoft.cognitiveservices.speech.SpeechSynthesizer;
@@ -22,48 +29,42 @@ public class CognitiveServices extends CordovaPlugin {
 
     private SpeechConfig speechConfig;
     private SpeechSynthesizer synthesizer;
+    private JSONArray executeData;
+    private CallbackContext callbackContext;
 
     private static final String LOGTAG = "CognitiveServices";
 
-    private static final String subscriptionError = "Please run SetSubscription with the Cognitive Services subscription key and region.";
+    private static final String subscriptionError = "Please run init with the Cognitive Services subscription key and region.";
 
     private static final String INTERNET = Manifest.permission.INTERNET;
-    private static final int INTERNET_REQ_CODE = 5;
+    private static final int INTERNET_REQ_CODE = 1;
+    private static final int INTERNET_REQ_CODE_SSML = 2;
+    private static final String RECORD_AUDIO_PERMISSION = Manifest.permission.RECORD_AUDIO;
+    private static final int RECORD_AUDIO_REQ_CODE = 3;
 
     @Override
-    public boolean execute(final String action, final JSONArray data, final CallbackContext callbackContext) {
-        Log.d(LOGTAG, "Plugin Called: " + action);
-
+    public boolean execute(final String action, final JSONArray data, final CallbackContext callbackContxt) {
+        callbackContext = callbackContxt;
+        executeData = data;
         switch(action) {
             case "StartSpeaking":
                 getPermission(INTERNET, INTERNET_REQ_CODE);
+                break;
+            case "SpeakSsml":
+                getPermission(INTERNET, INTERNET_REQ_CODE_SSML);
+                break;
+            case "SetSubscription":
                 cordova.getThreadPool().execute(new Runnable() {
                     public void run() {
-                        callbackContext.sendPluginResult(startSpeaking(data));
+                        callbackContxt.sendPluginResult(setSubscription(data));
                     }
                 });
                 break;
-            case "SpeakTextAsync":
-                getPermission(INTERNET, INTERNET_REQ_CODE);
-                callbackContext.sendPluginResult(SpeakTextAsync(data));
-                break;
-            case "SpeakSsml":
-                getPermission(INTERNET, INTERNET_REQ_CODE);
-                    cordova.getThreadPool().execute(new Runnable() {
-                        public void run() {
-                            callbackContext.sendPluginResult(SpeakSsml(data));
-                        }
-                    });
-                break;
-            case "SpeakSsmlAsync":
-                getPermission(INTERNET, INTERNET_REQ_CODE);
-                callbackContext.sendPluginResult(SpeakSsmlAsync(data));
-                break;
-            case "SetSubscription":
-                callbackContext.sendPluginResult(setSubscription(data));
+            case "StartListening":
+                getPermission(RECORD_AUDIO_PERMISSION, RECORD_AUDIO_REQ_CODE);
                 break;
             default:
-                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Unexpected error calling Cognitive Services plugin"));
+            callbackContxt.sendPluginResult(new PluginResult(Status.ERROR, "Unexpected error calling Cognitive Services plugin"));
                 }
 
         return true;
@@ -82,50 +83,30 @@ public class CognitiveServices extends CordovaPlugin {
                     + ex.getMessage());
         }
 
-        try {
-            synthesizer = new SpeechSynthesizer(speechConfig);
-        }
-        catch (final Exception err) {
-            return new PluginResult(Status.ERROR, "Error setting creating speech synthesizer. Error detail: " + System.lineSeparator()
-                    + err.getMessage());
-        }
-
         return new PluginResult(Status.OK);
     }
 
     private PluginResult startSpeaking(final JSONArray data) {
-        if (synthesizer == null) {
+        if (speechConfig == null) {
             return new PluginResult(Status.ERROR, subscriptionError);
         }
 
         try {
+            synthesizer = new SpeechSynthesizer(speechConfig);
             final SpeechSynthesisResult result = synthesizer.SpeakText(data.getString(0));
             return setResult(result);
         } catch (final Exception ex) {
-            return new PluginResult(Status.ERROR, "Speak Text error " + ex.getMessage());
+            return new PluginResult(Status.ERROR, "Speak Text error: " + ex.getMessage());
         }
     }
 
-    private PluginResult SpeakTextAsync(final JSONArray data) {
-        if (synthesizer == null) {
-            return new PluginResult(Status.ERROR, subscriptionError);
+    private PluginResult speakSsml(final JSONArray data) {
+        if (speechConfig==null) {
+            return new PluginResult(Status.ERROR, "Speak SSML error: " + subscriptionError); 
         }
 
         try {
-            final Future<SpeechSynthesisResult> result = synthesizer.SpeakTextAsync(data.getString(0));
-            return setResult(result.get());
-        } catch (final Exception ex) {
-            return new PluginResult(Status.ERROR, "Speak Text error " + ex.getMessage());
-        }
-    }
-
-    private PluginResult SpeakSsml(final JSONArray data) {
-        if (synthesizer == null) {
-            return new PluginResult(Status.ERROR, subscriptionError);
-        }
-
-        try {
-
+            synthesizer = new SpeechSynthesizer(speechConfig);
             final SpeechSynthesisResult result = synthesizer.SpeakSsml(data.getString(0));
             return setResult(result);
         } catch (final Exception ex) {
@@ -133,16 +114,73 @@ public class CognitiveServices extends CordovaPlugin {
         }
     }
 
-    private PluginResult SpeakSsmlAsync(final JSONArray data) {
-        if (synthesizer == null) {
-            return new PluginResult(Status.ERROR, subscriptionError);
+    private void startListening(){
+
+        if (speechConfig==null) {
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Start Listening error: " + subscriptionError));
+            return;
         }
 
+        //final AudioConfig audioInput = AudioConfig.fromDefaultMicrophoneInput();
+        final SpeechRecognizer recognizer = new SpeechRecognizer(speechConfig);
+
         try {
-            final Future<SpeechSynthesisResult> result = synthesizer.SpeakSsmlAsync(data.getString(0));
-            return setResult(result.get());
-        } catch (final Exception ex) {
-            return new PluginResult(Status.ERROR, "Speak Text error " + ex.getMessage());
+
+            JSONObject resultsMap = new JSONObject();
+
+            // Subscribes to events.
+            recognizer.recognizing.addEventListener((s, e) -> {
+                try{
+
+                resultsMap.put("isFinal", "false");
+                resultsMap.put("result", e.getResult().getText());
+                }
+                catch (JSONException err) {
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Start Listening error: " + err.getMessage()));
+                }
+                PluginResult pluginResult = new PluginResult(Status.OK, resultsMap);
+                pluginResult.setKeepCallback(true);
+                callbackContext.sendPluginResult(pluginResult);
+                return;
+            });
+
+            final Future<SpeechRecognitionResult> task = recognizer.recognizeOnceAsync();
+            SpeechRecognitionResult result = task.get();
+            
+            ResultReason resultReason = result.getReason();
+            PluginResult pluginResult;
+
+            resultsMap.put("isFinal", "true");
+
+            if (resultReason==ResultReason.Canceled)
+            {
+                pluginResult = new PluginResult(Status.OK, "Canceled: " + CancellationDetails.fromResult(result).getErrorDetails());
+            }
+            else if (resultReason==ResultReason.RecognizedSpeech)
+            {
+                resultsMap.put("result", result.getText());
+                pluginResult = new PluginResult(Status.OK, resultsMap);
+            }
+            //Capture if silence was detected.
+            else if (resultReason==null)
+            {
+                resultsMap.put("result", result.getText());
+                pluginResult = new PluginResult(Status.OK, resultsMap);
+            }
+            else
+            {
+                pluginResult = new PluginResult(Status.ERROR, "Start Listening error: " + result.getReason().toString());
+            }
+           
+            pluginResult.setKeepCallback(false);
+            callbackContext.sendPluginResult(pluginResult);
+
+    } 
+    catch (Exception ex) {
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Start Listening error: " + ex.getMessage()));
+        }
+    finally{
+            recognizer.close();
         }
     }
 
@@ -161,6 +199,54 @@ public class CognitiveServices extends CordovaPlugin {
     protected void getPermission(final String strCode, final int requestCode) {
         if (!cordova.hasPermission(strCode)) {
             cordova.requestPermission(this, requestCode, strCode);
+        }
+        else
+        {
+            executeActions(requestCode);
+        }
+    }
+
+    public void onRequestPermissionResult(int requestCode, String[] permissions,
+                                         int[] grantResults) throws JSONException
+    {
+        for(int r:grantResults)
+        {
+            if(r == PackageManager.PERMISSION_DENIED)
+            {
+               callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Permission Denied"));
+                return;
+            }
+        }
+        executeActions(requestCode);
+    }
+
+    private void executeActions(int requestCode)
+    { 
+        switch(requestCode)
+        {
+            case INTERNET_REQ_CODE:
+                cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    callbackContext.sendPluginResult(startSpeaking(executeData));
+                    }
+                });
+                break;
+            case INTERNET_REQ_CODE_SSML:
+                cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    callbackContext.sendPluginResult(speakSsml(executeData));
+                    }
+                });
+                break;
+            case RECORD_AUDIO_REQ_CODE:
+                cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    startListening();
+                    }
+                });
+                break;    
+            default:
+                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Unexpected error calling Cognitive Services plugin"));
         }
     }
 

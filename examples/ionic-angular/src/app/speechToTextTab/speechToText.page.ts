@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, NgZone, ChangeDetectorRef} from '@angular/core';
 import {CognitiveServices} from '@ionic-native/cognitiveservices/ngx';
 
 
@@ -8,47 +8,49 @@ import {CognitiveServices} from '@ionic-native/cognitiveservices/ngx';
     styleUrls: ['speechToText.page.scss']
 })
 
-export class SpeechToTextPage {
-    captureButtonText = 'Capture Speech';
-    captureButtonColor = 'primary';
-    capturePressed = false;
+export class SpeechToTextPage implements OnInit {
     capturedText: string[];
+    isListening = false;
 
-    constructor(private cognitiveServices: CognitiveServices) {
+    constructor(private zone: NgZone,
+                private cognitiveServices: CognitiveServices,
+                private cdr: ChangeDetectorRef) {
+    }
+
+    public ngOnInit(): void {
     }
 
     captureSpeechButtonClicked() {
-        this.toggleSpeechButton(!this.capturePressed);
-
+        if (this.isListening) {
+            this.stopAudioCapture();
+            return;
+        }
+        this.isListening = true;
+        this.startListening();
     }
 
     stopAudioCapture() {
-        this.toggleSpeechButton(false);
-    }
-
-    toggleSpeechButton(state: boolean) {
-        if (state) {
-            this.startListening();
-            this.capturePressed = true;
-            this.captureButtonText = 'Stop Capture';
-            this.captureButtonColor = 'danger';
-        } else {
-            this.stopListening();
-            this.capturePressed = false;
-            this.captureButtonText = 'Capture Speech';
-            this.captureButtonColor = 'primary';
-        }
+        this.isListening = false;
+        this.stopListening();
     }
 
     startListening() {
-        this.cognitiveServices.RecognizeFromMicrophone().subscribe(results => {
-            this.capturedText = results['result'];
+        this.cognitiveServices.startListening().subscribe(results => {
+            this.zone.run(() => {
+                    if (results['isFinal'].toString() === 'false') {
+                    this.capturedText = results['result'];
+                    } else {
+                        this.capturedText = results['result'];
+                        this.isListening = false;
+                    }
+                });
         }, (str: any) => {
             alert(str);
+            this.isListening = false;
         });
     }
 
     stopListening() {
-        this.cognitiveServices.StopListening();
+        this.cognitiveServices.stopListening();
     }
 }

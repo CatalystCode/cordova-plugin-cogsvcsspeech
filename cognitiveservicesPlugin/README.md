@@ -43,10 +43,10 @@ To create a Speech Resource, follow the instructions in the Azure
 documentation: [Try the Speech service for
 free](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started#create-a-speech-resource-in-azure).
 
-### SetSubscription (string speechSubscriptionKey, string serviceRegion)
+### init (string speechSubscriptionKey, string serviceRegion)
 
 ```js
-microsoft.plugin.cognitiveservices.SetSubscription(string speechSubscriptionKey,
+microsoft.plugin.cognitiveservices.init(string speechSubscriptionKey,
 string serviceRegion, Function successCallback, Function errorCallback)
 ```
 
@@ -58,29 +58,29 @@ subscription](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-s
 For more information read [About
 regions](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started#about-regions)
 
-SetSubscription creates the Cognitive Services speech configuration and
+init creates the Cognitive Services speech configuration and
 requires the subscription and region of the Azure Speech resource.
 
-SetSubscription must be called before the plugin can be used by other
+init must be called before the plugin can be used by other
 method. Recommended to call the SetSubscription method in the
 InitializingApp method.
 
-###StartSpeaking (string speechText)
+### startSpeaking (string speechText)
 
 **Speech Text**: The text that will be spoken by the audio player.
 
 ```js
-microsoft.plugin.cognitiveservices.StartSpeaking(string speechText, Function
+microsoft.plugin.cognitiveservices.startSpeaking(string speechText, Function
 successCallback, Function errorCallback)
 ```
 
 StartSpeaking uses the Speech SDK to playback the text that is sent to the
 function.
 
-### SpeakSsml (string speechText)
+### startSpeakingSSML (string speechText)
 
 ```js
-microsoft.plugin.cognitiveservices.SpeakSsml(string speechText, Function
+microsoft.plugin.cognitiveservices.startSpeakingSSML(string speechText, Function
 successCallback, Function errorCallback)
 ```
 
@@ -95,10 +95,10 @@ synthesized speech using the text-to-speech service. Compared to plain
 text, SSML allows developers to fine-tune the pitch, pronunciation,
 speaking rate, volume, and more of the text-to-speech output.
 
-### RecognizeFromMicrophone ()
+### startListening()
 
 ```js
-microsoft.plugin.cognitiveservices.RecognizeFromMicrophone (Function
+microsoft.plugin.cognitiveservices.startListening (Function
 successCallback, Function errorCallback)
 ```
 
@@ -114,9 +114,7 @@ processing the spoken words.
 
 The return value is a set of string values.
 
-iOS Only.
-
-### StopListening()
+### stopListening()
 
 ```js
 microsoft.plugin.cognitiveservices.stopListening(Function successCallback,
@@ -127,10 +125,10 @@ Stop the recognition process. No return value.
 
 iOS Only.
 
-### SpeakStop()
+### stopSpeaking()
 
 ```js
-microsoft.plugin.cognitiveservices.speakStop(Function successCallback, Function errorCallback)
+microsoft.plugin.cognitiveservices.stopSpeaking(Function successCallback, Function errorCallback)
 ```
 
 Stops the AVPlayer from playing. No return value.
@@ -229,7 +227,7 @@ constructor(private cognitiveServices: CognitiveServices) { }
 // Set the subscription information
 initializeApp() {
         this.platform.ready().then(() => {
-       this.cognitiveServices.SetSubscription(
+       this.cognitiveServices.init(
                      environment.subscriptionKey,
                environment.serviceRegion).then(
                    () => { },
@@ -248,7 +246,7 @@ constructor(private cognitiveServices: CognitiveServices) { }
 ...
 
 // Start the recognition process (iOS only)
- this.cognitiveServices.RecognizeFromMicrophone().subscribe(
+ this.cognitiveServices.startListening().subscribe(
         results => {
           if (!results.isFinal) {
               matches = results.result;
@@ -264,22 +262,22 @@ constructor(private cognitiveServices: CognitiveServices) { }
 
 
 // Stop the recognition process (iOS only)
-this.cognitiveServices.StopListening();
+this.cognitiveServices.stopListening();
 
 // Speak the text in the StartSpeaking variable
-this.cognitiveServices.StartSpeaking(textToSpeak).then(
+this.cognitiveServices.startSpeaking(textToSpeak).then(
         () => {},
         (error: any) => {alert(error);}
       );
 
 // Speak using the SSML xml values
-this.cognitiveServices.SpeakSsml(speakSsml).then(
+this.cognitiveServices.startSpeakingSsml(speakSsml).then(
         () => {},
         (error: any) => {alert(error); }
       );
 
 // Stop the speaking process (iOS only)
-this.cognitiveServices.SpeakStop();
+this.cognitiveServices.stopSpeaking();
 ```
 
 ## Ionic Native
@@ -319,7 +317,7 @@ permission
 
 The Java SDK for Android is packaged as an AAR (Android Library), which
 includes the necessary libraries and required Android permissions. The
-Speech AAR is included with the plugin code.
+Speech AAR is downloaded during the installation process using gradle.
 
 ### Files
 
@@ -333,8 +331,6 @@ client-sdk-1.8.0 AAR dependency
 
 The following file is found under the cognitiveServicesPlugin/aar
 directory:
-
-- **client-sdk-1.8.0.aar** -- The Cognitive Services Android Library
 
 ### Further readings
 

@@ -2,6 +2,7 @@
 cognitiveservicesPlugin/node_modules/
 cognitiveservicesPlugin/.gradle/
 cognitiveservicesPlugin/platforms/
-cognitiveservicesPlugin/src/ios/MicrosoftCognitiveServicesSpeech.framework/
-cognitiveservicesPlugin/aar
 .vscode/
+cognitiveservicesPlugin/local.properties
+examples/ionic-angular/platforms
+examples/ionic-angular/src/environments/

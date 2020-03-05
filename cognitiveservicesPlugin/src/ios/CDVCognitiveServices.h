@@ -12,10 +12,10 @@ SPXSpeechRecognizer* speechRecognizer;
 }
 
 - (void)SetSubscription: (CDVInvokedUrlCommand*)command;
-- (void)RecognizeFromMicrophone: (CDVInvokedUrlCommand*)command;
+- (void)StartListening: (CDVInvokedUrlCommand*)command;
 - (void)SpeakSsml: (CDVInvokedUrlCommand*)command;
 - (void)StartSpeaking: (CDVInvokedUrlCommand*)command;
 - (void)StopListening: (CDVInvokedUrlCommand*)command;
-- (void)SpeakStop: (CDVInvokedUrlCommand*)command;
+- (void)StopSpeaking: (CDVInvokedUrlCommand*)command;
 
 @end

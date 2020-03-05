@@ -7,6 +7,5 @@
     <name>"Microsoft Cognitive Services Speech Services Plugin Tests."</name>
     <license>Apache 2.0</license>
 
-    <js-module src="tests.js" name="tests">
-    </js-module>
+    <js-module src="tests.js" name="tests"></js-module>
 </plugin>

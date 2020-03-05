@@ -26,7 +26,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.cognitiveServices.SetSubscription(
+      this.cognitiveServices.init(
           environment.subscriptionKey,
           environment.serviceRegion).then(
           () => { },

@@ -33,13 +33,11 @@ export declare class CognitiveServices extends IonicNativePlugin {
      * @param arg2 {number} Another param to configure something
      * @return {Promise<any>} Returns a promise that resolves when something happens
      */
-    SetSubscription(speechSubscriptionKey: string, serviceRegion: string): Promise<void>;
-    RecognizeFromMicrophone(): Observable<Array<Object>>;
-    SpeakSsml(speechText: string): Promise<string>;
-    SpeakSsmlAsync(speechText: string): Promise<string>;
-    StartSpeaking(speechText: string): Promise<string>;
-    SpeakTextAsync(speechText: string): Promise<string>;
-    StopListening(): Promise<void>;
+    init(speechKey: string, serviceRegion: string): Promise<void>;
+    startListening(): Observable<Array<Object>>;
+    startSpeakingSsml(speechText: string): Promise<string>;
+    startSpeaking(speechText: string): Promise<string>;
+    stopListening(): Promise<void>;
     SpeakWithVoiceOptions(speechText: string, options?: SpeechVoiceOptions): Promise<void>;
-    SpeakStop(): Promise<void>;
+    stopSpeaking(): Promise<void>;
 }

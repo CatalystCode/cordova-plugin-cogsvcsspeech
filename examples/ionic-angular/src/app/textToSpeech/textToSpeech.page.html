@@ -15,20 +15,18 @@
     </ion-label>
     <ion-textarea
     class="textToSpeak"
-    disabled
-    readonly
     setFocus="true"
-    value="{{text}}">
+    [(ngModel)]="text">
     </ion-textarea>
   </ion-item>
   <ion-button 
-  name="playbackButton"
   round
   outline
+  expand="block"
+  [color]="isPlaying ? 'danger' : 'primary'"
   (click)="playbackButtonClicked()"
   expand="block"
-  color="{{playbackButtonColor}}"
   >
-    {{playbackButtonText}}
+    {{isPlaying ? 'Stop Playback' : 'Speak Text'}}
   </ion-button>
 </ion-content>

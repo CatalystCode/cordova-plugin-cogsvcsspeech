@@ -28,6 +28,7 @@
     "cordova-browser": "6.0.0",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-console": "^1.1.0",
+    "cordova-plugin-ionic-webview": "^4.1.3",
     "core-js": "^2.5.4",
     "microsoft-plugin-cognitiveservices": "file:../../cognitiveservicesPlugin",
     "rxjs": "~6.5.1",
@@ -50,7 +51,6 @@
     "codelyzer": "^5.0.0",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
-    "cordova-plugin-ionic-webview": "^4.1.3",
     "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-whitelist": "^1.3.4",
@@ -73,12 +73,10 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {
-        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-console": {},
-      "microsoft-plugin-cognitiveservices": {}
+      "microsoft-plugin-cognitiveservices": {},
+      "cordova-plugin-ionic-webview": {}
     },
     "platforms": [
       "android",

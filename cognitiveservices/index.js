@@ -18,15 +18,12 @@ var CognitiveServicesOriginal = /** @class */ (function (_super) {
     function CognitiveServicesOriginal() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    CognitiveServicesOriginal.prototype.SetSubscription = function (speechSubscriptionKey, serviceRegion) { return cordova(this, "SetSubscription", {}, arguments); };
-    CognitiveServicesOriginal.prototype.RecognizeFromMicrophone = function () { return cordova(this, "RecognizeFromMicrophone", { "callbackOrder": "reverse", "observable": true }, arguments); };
-    CognitiveServicesOriginal.prototype.SpeakSsml = function (speechText) { return cordova(this, "SpeakSsml", {}, arguments); };
-    CognitiveServicesOriginal.prototype.SpeakSsmlAsync = function (speechText) { return cordova(this, "SpeakSsmlAsync", {}, arguments); };
+    CognitiveServicesOriginal.prototype.init = function (speechKey, serviceRegion) { return cordova(this, "init", {}, arguments); };
+    CognitiveServicesOriginal.prototype.startListening = function () { return cordova(this, "startListening", { "callbackOrder": "reverse", "observable": true }, arguments); };
+    CognitiveServicesOriginal.prototype.startSpeakingSsml = function (speechText) { return cordova(this, "startSpeakingSsml", {}, arguments); };
     CognitiveServicesOriginal.prototype.startSpeaking = function (speechText) { return cordova(this, "startSpeaking", {}, arguments); };
-    CognitiveServicesOriginal.prototype.SpeakTextAsync = function (speechText) { return cordova(this, "SpeakTextAsync", {}, arguments); };
-    CognitiveServicesOriginal.prototype.StopListening = function () { return cordova(this, "StopListening", {}, arguments); };
-    CognitiveServicesOriginal.prototype.SpeakWithVoiceOptions = function (speechText, options) { return cordova(this, "SpeakWithVoiceOptions", {}, arguments); };
-    CognitiveServicesOriginal.prototype.SpeakStop = function () { return cordova(this, "SpeakStop", {}, arguments); };
+    CognitiveServicesOriginal.prototype.stopListening = function () { return cordova(this, "stopListening", {}, arguments); };
+    CognitiveServicesOriginal.prototype.stopSpeaking = function () { return cordova(this, "stopSpeaking", {}, arguments); };
     CognitiveServicesOriginal.pluginName = "Cognitive Services";
     CognitiveServicesOriginal.plugin = "microsoft-plugin-cognitiveservices";
     CognitiveServicesOriginal.pluginRef = "microsoft.plugin.cognitiveservices";
