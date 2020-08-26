@@ -99,7 +99,7 @@ cp -r ../../cognitiveservices node_modules/@ionic-native/
 
 While this should install all components, there have been a few changes to
 cordova recently and errors were being generated while devloping on the Mac.  
-If you get errors, specifically using toLowerCase, the run the following commands:
+If you get errors, specifically using toLowerCase, then run the following commands:
 
 ```bash
 npm uninstall cordova
