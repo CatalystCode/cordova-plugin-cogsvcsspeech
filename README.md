@@ -162,7 +162,7 @@ download some standard components that are required for development.
 
 #### Run Android Application
 
-To run the application, in a terminal window, browse to the speecthtoText folder
+To run the application, in a terminal window, browse to the speechtoText folder
 and run the following:
 
 ```bash
@@ -181,7 +181,7 @@ account, or download from the App Store.
 
 #### Run iOS Application
 
-To run the application, in a terminal window, browse to the speecthtoText folder
+To run the application, in a terminal window, browse to the speechtoText folder
 and run the following:
 
 ```bash
